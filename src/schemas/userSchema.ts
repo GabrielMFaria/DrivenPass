@@ -9,3 +9,8 @@ export const signUpSchema = Joi.object({
      .required()
      .messages({ 'any.only': 'confirmPassword must match password' }),
 });
+
+export const signInSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required()
+});
