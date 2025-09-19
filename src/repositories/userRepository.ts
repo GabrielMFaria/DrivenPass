@@ -9,3 +9,10 @@ export async function createUser(name: string, email: string, password: string) 
     data: { name, email, password },
   });
 }
+
+export async function deleteUserAndCredentials(userId: number) {
+    
+  await prisma.credential.deleteMany({ where: { userId } });
+
+  await prisma.user.delete({ where: { id: userId } });
+}

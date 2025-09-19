@@ -16,6 +16,10 @@ export async function findCredentialById(userId: number, id: number) {
   return await prisma.credential.findFirst({ where: { id, userId } });
 }
 
+export async function updateCredential(id: number, data: any) {
+  return await prisma.credential.update({ where: { id }, data });
+}
+
 export async function deleteCredential(id: number) {
   return await prisma.credential.delete({ where: { id } });
 }

@@ -3,6 +3,7 @@ import {
   createCredentialController,
   getAllCredentialsController,
   getCredentialByIdController,
+  updateCredentialController,
   deleteCredentialController
 } from "../controllers/credentialController";
 import { authenticateToken } from "../middlewares/authMiddleware";
@@ -19,6 +20,8 @@ router.post("/", validateSchema(credentialSchema), createCredentialController);
 router.get("/", getAllCredentialsController);
 
 router.get("/:id", validatePositiveNumberParam("id"), getCredentialByIdController);
+
+router.put("/:id", validatePositiveNumberParam("id"), validateSchema(credentialSchema), updateCredentialController);
 
 router.delete("/:id", validatePositiveNumberParam("id"), deleteCredentialController);
 

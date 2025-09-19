@@ -38,3 +38,7 @@ export async function signInUser(email: string, password: string) {
 
   return { token };
 }
+
+export async function eraseUser(userId: number) {
+  await userRepo.deleteUserAndCredentials(userId);
+}

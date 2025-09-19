@@ -18,12 +18,30 @@ export async function getAllCredentialsController(req: AuthRequest, res: Respons
 
 export async function getCredentialByIdController(req: AuthRequest, res: Response) {
   const id = Number(req.params.id);
-  const credential = await credentialService.getCredentialById(req.userId!, id);
-  res.status(200).json(credential);
+  try {
+    const credential = await credentialService.getCredentialById(req.userId!, id);
+    res.status(200).json(credential);
+  } catch (err: any) {
+    res.status(err.status || 500).json({ message: err.message });
+  }
+}
+
+export async function updateCredentialController(req: AuthRequest, res: Response) {
+  const id = Number(req.params.id);
+  try {
+    await credentialService.updateCredentialService(req.userId!, id, req.body);
+    res.status(204).send();
+  } catch (err: any) {
+    res.status(err.status || 500).json({ message: err.message });
+  }
 }
 
 export async function deleteCredentialController(req: AuthRequest, res: Response) {
   const id = Number(req.params.id);
-  await credentialService.deleteCredential(req.userId!, id);
-  res.status(204).send();
+  try {
+    await credentialService.deleteCredentialService(req.userId!, id);
+    res.status(204).send();
+  } catch (err: any) {
+    res.status(err.status || 500).json({ message: err.message });
+  }
 }
